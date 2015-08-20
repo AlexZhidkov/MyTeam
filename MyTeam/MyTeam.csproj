@@ -1215,7 +1215,6 @@
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="app_deleteMe.ts" />
     <TypeScriptCompile Include="app.ts" />
     <TypeScriptCompile Include="Domain\game.ts" />
     <TypeScriptCompile Include="gameCtrl.ts" />

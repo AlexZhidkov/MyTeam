@@ -2,22 +2,22 @@
     angular.module("teamBuilder.services", ["firebase"]);
 
     import Game = App.Domain.Game;
-    import Promise = angular.IPromise; //    interface IRepository {}
-    //    interface IGameRepository extends Firebase {}
+    import Promise = angular.IPromise;
 
-    //export 
+    export interface IRepository {
+        getSports(): angular.IPromise<string[]>
+    }
 
-    export class Repository {
+    export class Repository implements IRepository {
 
         data: Promise<string>;
         obj: AngularFireObject;
 
         static $inject = ["$firebaseObject", "$q"];
         constructor(private $firebaseObject: AngularFireObjectService, private $q) {
-        //constructor() {
             //this.data = "test";
-            var fb = new Firebase('https://teambuilder.firebaseio.com/Sports/0');
-            this.obj = $firebaseObject(fb);
+            //var fb = new Firebase('https://teambuilder.firebaseio.com/Sports/0');
+            //this.obj = $firebaseObject(fb);
 
             //this.data = $firebaseObject(fb).$value; 
             // service.users = $firebaseObject(usersRef).$loaded; 
@@ -27,12 +27,12 @@
                 alert(d.$value);
 
             });
-*/
+
             fb.child("id").on("value", snapshot => {
                alert(snapshot.val());  
                this.data = snapshot.val();
             });
-
+*/
         }
 
         getGames(): Game[] {
@@ -50,11 +50,16 @@
             ];
         }
 
+/*
         getSports(): string[] {
-            //var ref = new Firebase("https://teambuilder.firebaseio.com");
-            //var data = this.$firebaseObject(ref);
-            return ["Football", "Volleyball"];
+            var ret: string[];
+            const sportsRef = new Firebase("https://teambuilder.firebaseio.com/Sports");
+            sportsRef.once("value", snapshot => {
+                ret = snapshot.val();
+            });
+            return ret;
         }
+*/
 
         //https://docs-examples.firebaseio.com/web/data
         //https://www.firebase.com/docs/web/libraries/angular/api.html#angularfire-firebaseobject-loaded
@@ -64,20 +69,17 @@
         //https://www.firebase.com/docs/web/guide/understanding-data.html
         //https://www.firebase.com/docs/web/api/datasnapshot/
 
-        getData(): Promise<string[]> {
+        getSports(): Promise<string[]> {
             var deferred = this.$q.defer();
-            setTimeout(function () {
-                deferred.notify('About to ... ');
-
+            setTimeout(() => {
+                deferred.notify("About to get sports.");
                 var sportsRef = new Firebase("https://teambuilder.firebaseio.com/Sports");
-                sportsRef.once("value", function (snapshot) {
-                    var data = snapshot.val();
-                    // data equals { "name": { "first": "Fred", "last": "Flintstone" }, "age": 53 }
-                    console.log(data);
-                    deferred.resolve(data);
+                sportsRef.once("value", snapshot => {
+                    deferred.resolve(snapshot.val());
                 });
             }, 1000);
             return deferred.promise;
+
 /*
             var fb = new Firebase('https://teambuilder.firebaseio.com/Sports');
             var sportsObject = this.$firebaseObject(fb);
