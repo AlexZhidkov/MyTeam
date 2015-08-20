@@ -7,7 +7,7 @@
     <div class="panel-body">
         <pre>{{vm | json}}</pre>
         <select name="singleSelect" ng-model="vm.choosenSport">
-            <option ng-repeat="sport in vm.sports">{{sport}}</option>
+            <option ng-repeat="sport in vm.sports">{{sport.name}}</option>
         </select>
         <table class="table">
             <thead>

@@ -1,16 +1,17 @@
 ﻿module App.Game {
+    import Sport = App.Domain.ISport;
     angular.module("teamBuilder.game", []);
 
     interface IGameModel {
         title: string;
         games: App.Domain.IGame[];
-        sports: string[];
+        sports: Sport[];
     }
 
     class GameListCtrl implements IGameModel {
         title: string;
         games: App.Domain.IGame[];
-        sports: string[];
+        sports: Sport[];
 
         static $inject = ["$scope", "repository"];
         constructor(private $scope, private repository: App.Common.Repository) {

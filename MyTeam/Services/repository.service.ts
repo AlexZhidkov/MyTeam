@@ -3,9 +3,10 @@
 
     import Game = App.Domain.Game;
     import Promise = angular.IPromise;
+    import Sport = App.Domain.ISport;
 
     export interface IRepository {
-        getSports(): angular.IPromise<string[]>
+        getSports(): angular.IPromise<Sport[]>
     }
 
     export class Repository implements IRepository {
@@ -13,8 +14,8 @@
         data: Promise<string>;
         obj: AngularFireObject;
 
-        static $inject = ["$firebaseObject", "$q"];
-        constructor(private $firebaseObject: AngularFireObjectService, private $q) {
+        static $inject = ["$firebaseArray", "$q"];
+        constructor(private $firebaseArray: AngularFireArrayService, private $q) {
             //this.data = "test";
             //var fb = new Firebase('https://teambuilder.firebaseio.com/Sports/0');
             //this.obj = $firebaseObject(fb);
@@ -50,17 +51,6 @@
             ];
         }
 
-/*
-        getSports(): string[] {
-            var ret: string[];
-            const sportsRef = new Firebase("https://teambuilder.firebaseio.com/Sports");
-            sportsRef.once("value", snapshot => {
-                ret = snapshot.val();
-            });
-            return ret;
-        }
-*/
-
         //https://docs-examples.firebaseio.com/web/data
         //https://www.firebase.com/docs/web/libraries/angular/api.html#angularfire-firebaseobject-loaded
         //https://docs.angularjs.org/api/ng/service/$q
@@ -69,14 +59,44 @@
         //https://www.firebase.com/docs/web/guide/understanding-data.html
         //https://www.firebase.com/docs/web/api/datasnapshot/
 
-        getSports(): Promise<string[]> {
+        getSports(): Promise<Sport[]> {
+            var self = this;
             var deferred = this.$q.defer();
             setTimeout(() => {
                 deferred.notify("About to get sports.");
                 var sportsRef = new Firebase("https://teambuilder.firebaseio.com/Sports");
+                var list = this.$firebaseArray(sportsRef);
+                list.$loaded()
+                    .then(function (x) {
+                        var sports: Sport[];
+                        console.log('x ', x);
+                        x.forEach(function (sportFirebase) {
+                            //ToDo
+
+                            var sport: Sport;
+                            //var sport = new ();
+
+                            sport.name = sportFirebase.$id.valueOf();
+                            sport.variants = sportFirebase.$value;
+                            console.log('sport', sport);
+                        });
+
+                        deferred.resolve(x);
+                    })
+                    .catch(function (error) {
+                        console.log("Error:", error);
+                    });
+/*
                 sportsRef.once("value", snapshot => {
+                    var sports: Sport[];
+                    console.log('snapshot.val() ', snapshot.val());
+                    snapshot.val().forEach(function (sport) {
+                        console.log('key %s, val %s', sport.key(),sport.val());
+                    });
+
                     deferred.resolve(snapshot.val());
                 });
+*/
             }, 1000);
             return deferred.promise;
 
