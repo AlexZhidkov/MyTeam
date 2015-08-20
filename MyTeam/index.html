@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Report Management App</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/node_modules/angular-material/angular-material.css">
+    <link rel="stylesheet" href="app.css" type="text/css" />
+</head>
+<body ng-app="teamBuilder">
+    <div ng-controller="MyCtrl as vm">
+
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <div class="navbar-brand">{{::vm.title}}</div>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            <div ng-include="'gamesView.html'"></div>
+        </div>
+    </div>
+    <!-- Library Scripts -->
+    <script src="scripts/angular.js"></script>
+    <script src="scripts/angular-aria.js"></script>
+    <script src="scripts/angular-animate.js"></script>
+    <script src="scripts/angular-resource.js"></script>
+    <script src="scripts/angular-mocks.js"></script>
+    <script src="scripts/angular-route.js"></script>
+    <script src="node_modules/angular-material/angular-material.js"></script>
+    <script src="node_modules/angularfire/dist/angularfire.js"></script>
+<!--
+    <script src="node_modules/firebase/lib/firebase-node.js"></script>
+-->
+    <script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
+
+    <!-- Application Script -->
+    <script src="app.js"></script>
+    <!-- Domain Classes -->
+    <script src="Domain/game.js"></script>
+    <!-- Services -->
+    <script src="Services/repository.service.js"></script>
+    <!-- Controllers -->
+    <script src="myCtrl.js"></script>
+    <script src="gameCtrl.js"></script>
+</body>
+</html>
