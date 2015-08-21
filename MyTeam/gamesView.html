@@ -5,10 +5,12 @@
         {{::vm.title}}
     </div>
     <div class="panel-body">
-        <pre>{{vm | json}}</pre>
-        <select name="singleSelect" ng-model="vm.choosenSport">
-            <option ng-repeat="sport in vm.sports">{{sport.name}}</option>
+        <!--<pre>{{vm | json}}</pre>-->
+        <select ng-options="sport.name for sport in vm.sports" ng-model="vm.choosenSport"></select>
+        <select ng-options="variant.description for variant in vm.choosenSport.variants" ng-model="vm.choosenSportVariant">
+            <option value="">Any</option>
         </select>
+        
         <table class="table">
             <thead>
             <tr>
@@ -23,8 +25,5 @@
             </tr>
             </tbody>
         </table>
-        <ul ng-repeat="sport in vm.sports">
-            <li>{{sport}}</li>
-        </ul>
     </div>
 </div>

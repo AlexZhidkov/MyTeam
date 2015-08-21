@@ -4,6 +4,7 @@
     import Game = Domain.Game;
     import Promise = angular.IPromise;
     import Sport = Domain.Sport;
+    import SportVariant = Domain.SportVariant;
 
     export interface IRepository {
         getSports(): angular.IPromise<Sport[]>
@@ -13,6 +14,8 @@
 
         data: Promise<string>;
         obj: AngularFireObject;
+
+        private firebaseUrl = "https://teambuilder.firebaseio.com/";
 
         static $inject = ["$firebaseArray", "$q"];
         constructor(private $firebaseArray: AngularFireArrayService, private $q) {
@@ -63,68 +66,34 @@
             var deferred = this.$q.defer();
             setTimeout(() => {
                 deferred.notify("About to get sports.");
-                var sportsRef = new Firebase("https://teambuilder.firebaseio.com/Sports");
-                var list = this.$firebaseArray(sportsRef);
-                list.$loaded()
-                    .then(x => {
+                var sportsRef = new Firebase(this.firebaseUrl + "Sports");
+                var sportsArray = this.$firebaseArray(sportsRef);
+                sportsArray.$loaded()
+                    .then(list => {
                         var sports = new Array<Sport>();
-                        x.forEach(sportFirebase => {
+                        list.forEach(sportFirebase => {
                             var sport = new Sport();
                             sport.name = sportFirebase.$id.valueOf();
-                            sport.variants = new Array<string>();
-                            for (var i = 0; i < 10; i++) {
+                            sport.variants = new Array<SportVariant>();
+                            for (var i = 0; i < 20; i++) {
                                 if (angular.isUndefined(sportFirebase[i])) {
                                     break;
                                 }
-                                sport.variants.push(sportFirebase[i]);
+                                sport.variants.push(new SportVariant(i, sportFirebase[i]));
                             };
                             sports.push(sport);
                         });
 
                         deferred.resolve(sports);
                     })
-                    .catch(function (error) {
+                    .catch(error => {
                         console.log("Error:", error);
                     });
-/*
-                sportsRef.once("value", snapshot => {
-                    var sports: Sport[];
-                    console.log('snapshot.val() ', snapshot.val());
-                    snapshot.val().forEach(function (sport) {
-                        console.log('key %s, val %s', sport.key(),sport.val());
-                    });
-
-                    deferred.resolve(snapshot.val());
-                });
-*/
             }, 1000);
             return deferred.promise;
-
-/*
-            var fb = new Firebase('https://teambuilder.firebaseio.com/Sports');
-            var sportsObject = this.$firebaseObject(fb);
-            return sportsObject.$loaded()
-                .then(sports => {
-                        console.log('Data recieved at service', sports.val());
-/*
-                        sports.forEach(function (userSnap) {
-                            console.log('user %s is in position %d with %d points', snap.key(), i++, snap.val());
-                        });
-/
-                        return sports.$value;
-                    }
-                )
-                .catch(error => {
-                    console.error("Error:", error);
-                    return this.$q.reject(error);
-                });
-            */
-            //return null;
-            //return this.data;
-            //return { "az": "test" };
         }
     }
-
+     
     angular
         .module("teamBuilder.services")
         .service("repository", Repository);

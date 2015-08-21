@@ -1,7 +1,7 @@
 ﻿module App.Domain {
     export interface ISport {
         name: string;
-        variants: string[];
+        variants: SportVariant[];
     }
 
     export class Sport implements ISport {
@@ -10,6 +10,6 @@
         }
 
         name: string;
-        variants: string[];
+        variants: SportVariant[];
     }
 } 

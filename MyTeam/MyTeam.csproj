@@ -1218,6 +1218,7 @@
     <TypeScriptCompile Include="app.ts" />
     <TypeScriptCompile Include="Domain\game.ts" />
     <TypeScriptCompile Include="Domain\sport.ts" />
+    <TypeScriptCompile Include="Domain\sportVariant.ts" />
     <TypeScriptCompile Include="gameCtrl.ts" />
     <TypeScriptCompile Include="myCtrl.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularfire\angularfire.d.ts" />
