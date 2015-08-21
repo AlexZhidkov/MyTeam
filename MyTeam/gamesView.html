@@ -1,5 +1,4 @@
-﻿<div class="panel panel-primary"
-     ng-controller="GameListCtrl as vm">
+﻿<div class="panel panel-primary" ng-controller="GameListCtrl as vm">
     <div class="panel-heading"
          style="font-size:large">
         {{::vm.title}}
@@ -21,7 +20,7 @@
             <tbody>
             <tr ng-repeat="game in vm.games">
                 <td>{{ game.id}} </td>
-                <td>{{ game.sport }}</td>
+                <td>{{ game.description }}</td>
             </tr>
             </tbody>
         </table>

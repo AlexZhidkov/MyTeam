@@ -18,13 +18,20 @@
             var self = this;
             self.title = "Reports";
 
-            self.games = repository.getGames();
+            //self.games = repository.getGames();
+            repository.getGames()
+                .then(data => {
+                self.games = data;
+                }, error => {
+                    console.log("Error getting games from repository", error);
+                });
             repository.getSports()
                 .then(data => {
-                self.sports = data;
+                    self.sports = data;
                 }, error => {
                     console.log("Error getting sports from repository", error);
                 });
+
 
         }
     }

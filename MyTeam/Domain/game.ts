@@ -1,13 +1,14 @@
 ﻿module App.Domain {
     export interface IGame {
-        id: number;
+        id: string;
         sport: string;
-/*
         variant: string;
+        place: string;
+        description : string;
+/*
         weekday: number;
         timeOfDay: number;
         time: string;
-        place: string;
 */
     }
 
@@ -17,14 +18,10 @@
             
         }
 
-        id: number;
+        id: string;
         sport: string;
-/*
         variant: string;
-        weekday: number;
-        timeOfDay: number;
-        time: string;
         place: string;
-*/
+        description: string;
     }
 } 
