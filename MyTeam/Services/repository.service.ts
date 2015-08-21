@@ -1,9 +1,9 @@
 ﻿module App.Common {
     angular.module("teamBuilder.services", ["firebase"]);
 
-    import Game = App.Domain.Game;
+    import Game = Domain.Game;
     import Promise = angular.IPromise;
-    import Sport = App.Domain.ISport;
+    import Sport = Domain.Sport;
 
     export interface IRepository {
         getSports(): angular.IPromise<Sport[]>
@@ -60,28 +60,28 @@
         //https://www.firebase.com/docs/web/api/datasnapshot/
 
         getSports(): Promise<Sport[]> {
-            var self = this;
             var deferred = this.$q.defer();
             setTimeout(() => {
                 deferred.notify("About to get sports.");
                 var sportsRef = new Firebase("https://teambuilder.firebaseio.com/Sports");
                 var list = this.$firebaseArray(sportsRef);
                 list.$loaded()
-                    .then(function (x) {
-                        var sports: Sport[];
-                        console.log('x ', x);
-                        x.forEach(function (sportFirebase) {
-                            //ToDo
-
-                            var sport: Sport;
-                            //var sport = new ();
-
+                    .then(x => {
+                        var sports = new Array<Sport>();
+                        x.forEach(sportFirebase => {
+                            var sport = new Sport();
                             sport.name = sportFirebase.$id.valueOf();
-                            sport.variants = sportFirebase.$value;
-                            console.log('sport', sport);
+                            sport.variants = new Array<string>();
+                            for (var i = 0; i < 10; i++) {
+                                if (angular.isUndefined(sportFirebase[i])) {
+                                    break;
+                                }
+                                sport.variants.push(sportFirebase[i]);
+                            };
+                            sports.push(sport);
                         });
 
-                        deferred.resolve(x);
+                        deferred.resolve(sports);
                     })
                     .catch(function (error) {
                         console.log("Error:", error);

@@ -7,7 +7,6 @@
     export class Sport implements ISport {
 
         public constructor() {
-
         }
 
         name: string;
