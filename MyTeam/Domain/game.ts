@@ -1,8 +1,7 @@
 ﻿module App.Domain {
-    export interface IGame {
-        id: string;
+    export interface INewGame {
         sport: string;
-        variant: string;
+        variantId: number;
         place: string;
         description : string;
 /*
@@ -12,15 +11,34 @@
 */
     }
 
+    export interface IGame extends INewGame {
+        id: string;
+        variant: string;
+    }
+
+
     export class Game implements IGame {
+
+        constructor() {
+
+        }
+
+        id: string;
+        sport: string;
+        variantId: number;
+        variant: string;
+        place: string;
+        description: string;
+    }
+
+    export class NewGame implements INewGame {
         
         constructor() {
             
         }
 
-        id: string;
         sport: string;
-        variant: string;
+        variantId: number;
         place: string;
         description: string;
     }

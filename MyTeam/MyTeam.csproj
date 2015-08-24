@@ -19,6 +19,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="app.css" />
+    <Content Include="addNewGameView.html" />
     <Content Include="gamesView.html" />
     <Content Include="index.html" />
     <Content Include="node_modules\angular-animate\angular-animate.js" />

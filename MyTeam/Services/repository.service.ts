@@ -142,6 +142,8 @@
             var deferred = this.$q.defer();
             setTimeout(() => {
                 deferred.notify("About to get place.");
+                
+                //ToDo is map needed?
                 var map = new this.$window.google.maps.Map(document.getElementById('map'), {
                     center: { lat: -33.866, lng: 151.196 },
                     zoom: 15
@@ -161,6 +163,10 @@
             return deferred.promise;
         }
 
+        addGame(newGame: Domain.INewGame) {
+            var gamesRef = new Firebase(this.firebaseUrl + "Games");
+            var newGameRef = gamesRef.push(newGame);
+        }
     }
 
     angular
