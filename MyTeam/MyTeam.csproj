@@ -1218,6 +1218,7 @@
     <TypeScriptCompile Include="app.ts" />
     <TypeScriptCompile Include="Domain\game.ts" />
     <TypeScriptCompile Include="Domain\sport.ts" />
+    <TypeScriptCompile Include="Domain\place.ts" />
     <TypeScriptCompile Include="Domain\sportVariant.ts" />
     <TypeScriptCompile Include="gameCtrl.ts" />
     <TypeScriptCompile Include="myCtrl.ts" />
@@ -1231,6 +1232,8 @@
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\firebase\firebase-simplelogin.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\firebase\firebase.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\google.geolocation\google.geolocation.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\googlemaps\google.maps.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="Services\repository.service.ts" />
   </ItemGroup>

@@ -3,8 +3,10 @@
 
     import Game = Domain.Game;
     import Promise = angular.IPromise;
+    import Place = Domain.Place;
     import Sport = Domain.Sport;
     import SportVariant = Domain.SportVariant;
+    import PlaceResult = google.maps.places.PlaceResult;
 
     export interface IGamesFirebase extends AngularFireSimpleObject {
         sport: string;
@@ -24,25 +26,25 @@
 
         private firebaseUrl = "https://teambuilder.firebaseio.com/";
 
-        static $inject = ["$firebaseArray", "$q"];
-        constructor(private $firebaseArray: AngularFireArrayService, private $q) {
+        static $inject = ["$firebaseArray", "$q", "$window"];
+        constructor(private $firebaseArray: AngularFireArrayService, private $q, private $window) {
             //var fb = new Firebase('https://teambuilder.firebaseio.com/Sports/0');
             //this.obj = $firebaseObject(fb);
 
             //this.data = $firebaseObject(fb).$value; 
             // service.users = $firebaseObject(usersRef).$loaded; 
-/*
-            data = $firebaseObject(fb);
-            data.$loaded().then((d) => {
-                alert(d.$value);
-
-            });
-
-            fb.child("id").on("value", snapshot => {
-               alert(snapshot.val());  
-               this.data = snapshot.val();
-            });
-*/
+            /*
+                        data = $firebaseObject(fb);
+                        data.$loaded().then((d) => {
+                            alert(d.$value);
+            
+                        });
+            
+                        fb.child("id").on("value", snapshot => {
+                           alert(snapshot.val());  
+                           this.data = snapshot.val();
+                        });
+            */
         }
 
         //https://github.com/casetext/fireproof
@@ -112,9 +114,56 @@
             }, 1000);
             return deferred.promise;
         }
+
+        getPlaces(location: string): Promise<Place[]> {
+            var deferred = this.$q.defer();
+            setTimeout(() => {
+                deferred.notify("About to get places.");
+                var placesRef = new Firebase(this.firebaseUrl + "Places/" + location);
+                var placesArray = this.$firebaseArray(placesRef);
+                placesArray.$loaded()
+                    .then(list => {
+                        var places = new Array<Place>();
+                        list.forEach(placeFirebase => {
+                            var place = new Place(placeFirebase.$id.valueOf(), placeFirebase.$value);
+                            places.push(place);
+                        });
+
+                        deferred.resolve(places);
+                    })
+                    .catch(error => {
+                        console.log("Error:", error);
+                    });
+            }, 1000);
+            return deferred.promise;
+        }
+
+        getPlace(placeId: string): Promise<PlaceResult> {
+            var deferred = this.$q.defer();
+            setTimeout(() => {
+                deferred.notify("About to get place.");
+                var map = new this.$window.google.maps.Map(document.getElementById('map'), {
+                    center: { lat: -33.866, lng: 151.196 },
+                    zoom: 15
+                });
+
+                var service = new this.$window.google.maps.places.PlacesService(map);
+                service.getDetails({
+                    placeId: placeId
+                }, function (place, status) {
+                    if (status === google.maps.places.PlacesServiceStatus.OK) {
+                        deferred.resolve(place);
+                    } else {
+                        console.log("PlacesServiceStatus Error:", status);
+                    }
+                });
+            }, 1000);
+            return deferred.promise;
+        }
+
     }
-     
+
     angular
         .module("teamBuilder.services")
-        .service("repository", Repository);
+        .service("repository", App.Common.Repository);
 }

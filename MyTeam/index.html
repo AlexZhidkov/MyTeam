@@ -6,9 +6,11 @@
     <title>Report Management App</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="/node_modules/angular-material/angular-material.css">
-    <link rel="stylesheet" href="app.css" type="text/css" />
+    <link rel="stylesheet" href="app.css" type="text/css"/>
+
 </head>
 <body ng-app="teamBuilder">
+    <div id="map"></div>
     <div ng-controller="MyCtrl as vm">
 
         <nav class="navbar navbar-default">
@@ -22,6 +24,7 @@
             <div ng-include="'gamesView.html'"></div>
         </div>
     </div>
+
     <!-- Library Scripts -->
     <script src="scripts/angular.js"></script>
     <script src="scripts/angular-aria.js"></script>
@@ -31,14 +34,19 @@
     <script src="scripts/angular-route.js"></script>
     <script src="node_modules/angular-material/angular-material.js"></script>
     <script src="node_modules/angularfire/dist/angularfire.js"></script>
-<!--
-    <script src="node_modules/firebase/lib/firebase-node.js"></script>
--->
+    <!--
+        <script src="node_modules/firebase/lib/firebase-node.js"></script>
+    -->
     <script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
+<!--
+    <script src="https://maps.googleapis.com/maps/api/js?signed_in=true&libraries=places&callback=initMap" async defer></script>
+-->
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true&libraries=places"></script>
 
     <!-- Application Script -->
     <script src="app.js"></script>
     <!-- Domain Classes -->
+    <script src="Domain/place.js"></script>
     <script src="Domain/game.js"></script>
     <script src="Domain/sport.js"></script>
     <script src="Domain/sportVariant.js"></script>
