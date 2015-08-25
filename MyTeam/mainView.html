@@ -1,10 +1,11 @@
-﻿<div class="panel panel-primary" ng-controller="GameListCtrl as vm">
+﻿<div class="panel panel-primary">
     <div class="panel-heading"
          style="font-size:large">
-        {{::vm.title}}
+        {{}}
     </div>
     <div class="panel-body">
         <pre>{{vm.placeGoogleId | json}}</pre>
+        <select ng-options="locality.name for locality in vm.localities" ng-model="vm.choosenLocality"></select>
         <select ng-options="sport.name for sport in vm.sports" ng-model="vm.choosenSport"></select>
         <select ng-options="variant.description for variant in vm.choosenSport.variants" ng-model="vm.choosenSportVariant">
             <option value="">Any</option>

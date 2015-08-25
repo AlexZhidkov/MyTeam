@@ -60,10 +60,11 @@
             var newGame = new Domain.NewGame();
             newGame.sport = this.choosenSport.name;
             newGame.variantId = this.choosenSportVariant.id;
-            newGame.place = this.choosenPlace.googleId;
+            newGame.place = this.placeGoogleId;
             newGame.description = this.description;
 
-            this.repository.addGame(newGame);
+            var locality = "ChIJc9U7KdW6MioR4E7fNbXwBAU";
+            this.repository.addGame(locality, newGame);
         }
     }
     angular

@@ -163,8 +163,8 @@
             return deferred.promise;
         }
 
-        addGame(newGame: Domain.INewGame) {
-            var gamesRef = new Firebase(this.firebaseUrl + "Games");
+        addGame(locality:string, newGame: Domain.INewGame) {
+            var gamesRef = new Firebase(this.firebaseUrl + locality + "/Games");
             var newGameRef = gamesRef.push(newGame);
         }
     }
