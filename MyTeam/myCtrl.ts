@@ -13,6 +13,6 @@
     }
 
     angular
-        .module("teamBuilder", ["teamBuilder.game", "teamBuilder.services", "firebase"])
+        .module("teamBuilder")
         .controller("MyCtrl", MyCtrl);
 }

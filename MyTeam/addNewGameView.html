@@ -4,12 +4,16 @@
         {{::vm.title}}
     </div>
     <div class="panel-body">
+<!--
         <pre>{{vm | json}}</pre>
+-->
         <select ng-options="sport.name for sport in vm.sports" ng-model="vm.choosenSport"></select>
         <select ng-options="variant.description for variant in vm.choosenSport.variants" ng-model="vm.choosenSportVariant">
             <option value="">Any</option>
         </select>
-        
+
+        <my-directive></my-directive>
+
         <select ng-options="place.name for place in vm.places" ng-model="vm.choosenPlace"></select>
 
         <button ng-click="vm.addNewGame()" class="btn btn-large btn-primary">Add</button>

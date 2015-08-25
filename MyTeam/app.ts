@@ -4,5 +4,5 @@
 /// <reference path="Scripts/typings/googlemaps/google.maps.d.ts"/>
 module App {
     angular
-        .module("teamBuilder", ["teamBuilder.services", "firebase"]);
+        .module("teamBuilder", ["teamBuilder.services", "teamBuilder.game", "firebase"]);
 }
