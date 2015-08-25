@@ -18,6 +18,7 @@
     <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="playerProfileView.html" />
     <Content Include="app.css" />
     <Content Include="addNewGameView.html" />
     <Content Include="mainView.html" />
@@ -1221,6 +1222,7 @@
     <TypeScriptCompile Include="Domain\game.ts" />
     <TypeScriptCompile Include="Domain\sport.ts" />
     <TypeScriptCompile Include="Domain\place.ts" />
+    <TypeScriptCompile Include="Domain\locality.ts" />
     <TypeScriptCompile Include="Domain\sportVariant.ts" />
     <TypeScriptCompile Include="gameCtrl.ts" />
     <TypeScriptCompile Include="myCtrl.ts" />

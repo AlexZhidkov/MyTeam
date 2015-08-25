@@ -7,11 +7,21 @@ module App {
 
     function routeConfig($routeProvider: ng.route.IRouteProvider): void {
         $routeProvider
-            .when("/newGame",
+            .when("/",
             {
-                templateUrl: "addNewGameView.html",
+                templateUrl: "mainView.html",
                 controller: "GameListCtrl as vm"
             })
+            .when("/newGame",
+                {
+                    templateUrl: "addNewGameView.html",
+                    controller: "GameListCtrl as vm"
+                })
+            .when("/player",
+                {
+                    templateUrl: "playerProfileView.html",
+                    controller: "PlayerProfileCtrl as vm"
+                })
             .otherwise("/");
     }
 

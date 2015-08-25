@@ -4,28 +4,13 @@
         {{}}
     </div>
     <div class="panel-body">
-        <pre>{{vm.placeGoogleId | json}}</pre>
-        <select ng-options="locality.name for locality in vm.localities" ng-model="vm.choosenLocality"></select>
+        <div>
+            <select ng-options="locality.name for locality in vm.localities" ng-model="vm.choosenLocality"></select>
+        </div>
         <select ng-options="sport.name for sport in vm.sports" ng-model="vm.choosenSport"></select>
         <select ng-options="variant.description for variant in vm.choosenSport.variants" ng-model="vm.choosenSportVariant">
             <option value="">Any</option>
         </select>
-        
-        <select ng-options="place.name for place in vm.places" ng-model="vm.choosenPlace"></select>
 
-        <table class="table">
-            <thead>
-            <tr>
-                <td>Id</td>
-                <td>Desc</td>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="game in vm.games">
-                <td>{{ game.id}} </td>
-                <td>{{ game.description }}</td>
-            </tr>
-            </tbody>
-        </table>
     </div>
 </div>

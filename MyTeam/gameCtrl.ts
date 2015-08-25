@@ -10,14 +10,16 @@
 
     class GameListCtrl implements IGameModel {
         title: string;
+        localities: Domain.ILocality[];
         games: Domain.IGame[];
         sports: Domain.ISport[];
         places: Domain.IPlace[];
 
+        choosenLocality: Domain.ILocality;
         choosenSport: Domain.ISport;
         choosenSportVariant: Domain.ISportVariant;
         choosenPlace: Domain.IPlace;
-        description: string; 
+        description: string;
         placeGoogleId: string;
 
         static $inject = ["$scope", "repository"];
@@ -29,6 +31,13 @@
 
             //var place = repository.getPlace('ChIJN1t_tDeuEmsRUsoyG83frY4');
             //self.games = repository.getGames();
+            repository.getLocalities()
+                .then(data => {
+                    self.localities = data;
+                    self.choosenLocality = data[0];
+                }, error => {
+                    console.log("Error getting places from repository", error);
+                });
             repository.getPlaces("Perth")
                 .then(data => {
                     self.places = data;
@@ -43,13 +52,14 @@
                 });
             repository.getGames()
                 .then(data => {
-                self.games = data;
+                    self.games = data;
                 }, error => {
                     console.log("Error getting games from repository", error);
                 });
             repository.getSports()
                 .then(data => {
                     self.sports = data;
+                    self.choosenSport = data[0];
                 }, error => {
                     console.log("Error getting sports from repository", error);
                 });

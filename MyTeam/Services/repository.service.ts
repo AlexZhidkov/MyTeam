@@ -115,6 +115,35 @@
             return deferred.promise;
         }
 
+        getLocalities(): Promise<Domain.ILocality[]> {
+            var deferred = this.$q.defer();
+            setTimeout(() => {
+                deferred.notify("About to get localities.");
+                var localitiesRef = new Firebase(this.firebaseUrl + "Localities");
+                var localitiesArray = this.$firebaseArray(localitiesRef);
+                localitiesArray.$loaded()
+                    .then(list => {
+                        var localities = new Array<Domain.Locality>();
+                        list.forEach(localityFirebase => {
+                            var googleId = localityFirebase.$id.valueOf();
+                            this.getPlace(googleId)
+                                .then(data => {
+                                    var locality = new Domain.Locality(googleId, data.formatted_address);
+                                    localities.push(locality);
+                                }, error => {
+                                    console.log("Error getting place from repository", error);
+                                });
+                        });
+                        //ToDo Confirm that this returns all localities
+                        deferred.resolve(localities);
+                    })
+                    .catch(error => {
+                        console.log("Error:", error);
+                    });
+            }, 1000);
+            return deferred.promise;
+        }
+
         getPlaces(location: string): Promise<Place[]> {
             var deferred = this.$q.defer();
             setTimeout(() => {
@@ -163,8 +192,8 @@
             return deferred.promise;
         }
 
-        addGame(locality:string, newGame: Domain.INewGame) {
-            var gamesRef = new Firebase(this.firebaseUrl + locality + "/Games");
+        addGame(locality: string, newGame: Domain.INewGame) {
+            var gamesRef = new Firebase(this.firebaseUrl + "Localities/" + locality + "/Games");
             var newGameRef = gamesRef.push(newGame);
         }
     }

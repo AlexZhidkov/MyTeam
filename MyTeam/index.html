@@ -19,14 +19,11 @@
         </div>
     </nav>
     <div class="container">
-        <!--
-        <div ng-include="'gamesView.html'"></div>
-        <div ng-include="'addNewGameView.html'"></div>
-        -->
-        <a class="btn btn-large" ng-href="#newGame">Player Profile</a>
+        <a class="btn btn-large" ng-href="#player">Player Profile</a>
         <a class="btn btn-large" ng-href="#newGame">Create New Game</a>
-        <a class="btn btn-large" ng-href="#newGame">Find a Game</a>
-        <a class="btn btn-large" ng-href="#newGame">Find a Player</a>
+        <a class="btn btn-large" ng-href="#findGame">Find a Game</a>
+        <a class="btn btn-large" ng-href="#findPlayer">Find a Player</a>
+        
         <ng-view></ng-view>
     </div>
 
@@ -52,6 +49,7 @@
     <!-- Application Script -->
     <script src="app.js"></script>
     <!-- Domain Classes -->
+    <script src="Domain/locality.js"></script>
     <script src="Domain/place.js"></script>
     <script src="Domain/game.js"></script>
     <script src="Domain/sport.js"></script>
