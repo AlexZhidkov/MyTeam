@@ -1223,7 +1223,7 @@
     <TypeScriptCompile Include="Domain\sportVariant.ts" />
     <TypeScriptCompile Include="gameCtrl.ts" />
     <TypeScriptCompile Include="myCtrl.ts" />
-    <TypeScriptCompile Include="myDirective.ts" />
+    <TypeScriptCompile Include="googlePlaces.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularfire\angularfire.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-animate.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-cookies.d.ts" />

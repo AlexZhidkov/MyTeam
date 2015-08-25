@@ -18,13 +18,14 @@
         choosenSportVariant: Domain.ISportVariant;
         choosenPlace: Domain.IPlace;
         description: string; 
-
+        placeGoogleId: string;
 
         static $inject = ["$scope", "repository"];
         constructor(private $scope, private repository: App.Common.Repository) {
             var self = this;
             self.title = "Reports";
             self.description = "";
+            self.placeGoogleId = "";
 
             //var place = repository.getPlace('ChIJN1t_tDeuEmsRUsoyG83frY4');
             //self.games = repository.getGames();
