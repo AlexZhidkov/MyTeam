@@ -12,20 +12,8 @@
 <body ng-app="teamBuilder">
     <md-content>
         <div id="map"></div>
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <div class="navbar-brand">{{::vm.title}}</div>
-                </div>
-            </div>
-        </nav>
         <div class="container">
-            <a class="btn btn-large" ng-href="#player">Player Profile</a>
-            <a class="btn btn-large" ng-href="#newGame">Create New Game</a>
-            <a class="btn btn-large" ng-href="#findGame">Find a Game</a>
-            <a class="btn btn-large" ng-href="#findPlayer">Find a Player</a>
-
-            <ng-view></ng-view>
+            <div ng-include="'mainView.html'"></div>
         </div>
     </md-content>
 
