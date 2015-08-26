@@ -5,7 +5,8 @@
         link: (scope: ng.IScope, element: ng.IAugmentedJQuery, attrs: ng.IAttributes) => void;
         restrict = "E";
         replace = true;
-        template = "<input id=\"google_places_ac\" name=\"google_places_ac\" type=\"text\" class=\"input-block-level\"/>";
+        //template = "<input id=\"google_places_ac\" name=\"google_places_ac\" type=\"text\" class=\"input-block-level\"/>";
+        template = "<input id=\"google_places_ac\" name=\"google_places_ac\" />";
         scope = { location:"="};
 
         constructor( /*list of dependencies*/) {

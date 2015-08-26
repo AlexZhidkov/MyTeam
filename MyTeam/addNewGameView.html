@@ -1,26 +1,11 @@
-﻿<md-content>
-    <div class="panel panel-primary">
-        <div class="panel-heading"
-             style="font-size:large">
-            {{::vm.title}}
-        </div>
-        <div class="panel-body">
-            <!--
-                    <pre>{{vm | json}}</pre>
-            -->
+﻿<md-input-container>
+    <md-content>
+        <google-places location="vm.placeGoogleId"></google-places>
+        <md-input-container flex>
+            <label>Description</label>
+            <textarea ng-model="vm.description"></textarea>
+        </md-input-container>
 
-            <div>
-                <select ng-options="sport.name for sport in vm.sports" ng-model="vm.choosenSport"></select>
-                <select ng-options="variant.description for variant in vm.choosenSport.variants" ng-model="vm.choosenSportVariant">
-                    <option value="">Any</option>
-                </select>
-            </div>
-            <div>
-                <google-places location="vm.placeGoogleId"></google-places>
-            </div>
-
-            <button ng-click="vm.addNewGame()" class="btn btn-large btn-primary">Add</button>
-            <md-button>MD Add</md-button>
-        </div>
-    </div>
-</md-content>
+        <md-button ng-click="vm.addNewGame()">Add</md-button>
+    </md-content>
+</md-input-container>
