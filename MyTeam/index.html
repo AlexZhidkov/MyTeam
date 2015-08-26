@@ -6,26 +6,28 @@
     <title>Report Management App</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="/node_modules/angular-material/angular-material.css">
-    <link rel="stylesheet" href="app.css" type="text/css"/>
+    <link rel="stylesheet" href="app.css" type="text/css" />
 
 </head>
 <body ng-app="teamBuilder">
-    <div id="map"></div>
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <div class="navbar-brand">{{::vm.title}}</div>
+    <md-content>
+        <div id="map"></div>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <div class="navbar-brand">{{::vm.title}}</div>
+                </div>
             </div>
+        </nav>
+        <div class="container">
+            <a class="btn btn-large" ng-href="#player">Player Profile</a>
+            <a class="btn btn-large" ng-href="#newGame">Create New Game</a>
+            <a class="btn btn-large" ng-href="#findGame">Find a Game</a>
+            <a class="btn btn-large" ng-href="#findPlayer">Find a Player</a>
+
+            <ng-view></ng-view>
         </div>
-    </nav>
-    <div class="container">
-        <a class="btn btn-large" ng-href="#player">Player Profile</a>
-        <a class="btn btn-large" ng-href="#newGame">Create New Game</a>
-        <a class="btn btn-large" ng-href="#findGame">Find a Game</a>
-        <a class="btn btn-large" ng-href="#findPlayer">Find a Player</a>
-        
-        <ng-view></ng-view>
-    </div>
+    </md-content>
 
     <!-- Library Scripts -->
     <script src="scripts/angular.js"></script>
@@ -37,14 +39,15 @@
     <script src="node_modules/angular-material/angular-material.js"></script>
     <script src="node_modules/angularfire/dist/angularfire.js"></script>
     <!--
-        <script src="node_modules/firebase/lib/firebase-node.js"></script>
+    <script src="node_modules/firebase/lib/firebase-node.js"></script>
     -->
     <script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
-<!--
+    <!--
     <script src="https://maps.googleapis.com/maps/api/js?signed_in=true&libraries=places&callback=initMap" async defer></script>
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?libraries=places&language=ru"></script>
--->
+    -->
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?libraries=places"></script>
+    <script src="http://pc035860.github.io/angular-easyfb/angular-easyfb.min.js"></script>
 
     <!-- Application Script -->
     <script src="app.js"></script>
@@ -58,6 +61,7 @@
     <script src="googlePlaces.js"></script>
     <!-- Services -->
     <script src="Services/repository.service.js"></script>
+    <script src="Services/facebook.service.js"></script>
     <!-- Controllers -->
     <script src="myCtrl.js"></script>
     <script src="gameCtrl.js"></script>

@@ -22,44 +22,45 @@
         description: string;
         placeGoogleId: string;
 
-        static $inject = ["$scope", "repository"];
-        constructor(private $scope, private repository: App.Common.Repository) {
+        static $inject = ["$scope", "repositoryService"];
+        constructor(private $scope, private repositoryService: App.Common.Repository) {
             var self = this;
             self.title = "Reports";
             self.description = "";
             self.placeGoogleId = "";
 
-            //var place = repository.getPlace('ChIJN1t_tDeuEmsRUsoyG83frY4');
-            //self.games = repository.getGames();
-            repository.getLocalities()
+            //var place = repositoryService.getPlace('ChIJN1t_tDeuEmsRUsoyG83frY4');
+            //self.games = repositoryService.getGames();
+            repositoryService.getLocalities()
                 .then(data => {
                     self.localities = data;
                     self.choosenLocality = data[0];
                 }, error => {
                     console.log("Error getting places from repository", error);
                 });
-            repository.getPlaces("Perth")
+            repositoryService.getPlaces("Perth")
                 .then(data => {
                     self.places = data;
                 }, error => {
                     console.log("Error getting places from repository", error);
                 });
-            repository.getPlace("ChIJswzMHEqlMioRq3D5C02BNFM")
+            repositoryService.getPlace("ChIJswzMHEqlMioRq3D5C02BNFM")
                 .then(data => {
                     var place = data;
                 }, error => {
                     console.log("Error getting place from repository", error);
                 });
-            repository.getGames()
+            repositoryService.getGames()
                 .then(data => {
                     self.games = data;
                 }, error => {
                     console.log("Error getting games from repository", error);
                 });
-            repository.getSports()
+            repositoryService.getSports()
                 .then(data => {
                     self.sports = data;
                     self.choosenSport = data[0];
+                    self.choosenSportVariant = data[0].variants[0];
                 }, error => {
                     console.log("Error getting sports from repository", error);
                 });
@@ -73,8 +74,8 @@
             newGame.place = this.placeGoogleId;
             newGame.description = this.description;
 
-            var locality = "ChIJc9U7KdW6MioR4E7fNbXwBAU";
-            this.repository.addGame(locality, newGame);
+            //var locality = "ChIJc9U7KdW6MioR4E7fNbXwBAU";
+            this.repositoryService.addGame(this.choosenLocality.id, newGame);
         }
     }
     angular

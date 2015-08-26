@@ -1240,6 +1240,7 @@
     <TypeScriptCompile Include="Scripts\typings\google.geolocation\google.geolocation.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\googlemaps\google.maps.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
+    <TypeScriptCompile Include="Services\facebook.service.ts" />
     <TypeScriptCompile Include="Services\repository.service.ts" />
   </ItemGroup>
   <ItemGroup>

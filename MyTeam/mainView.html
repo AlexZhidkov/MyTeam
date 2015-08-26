@@ -1,16 +1,47 @@
-﻿<div class="panel panel-primary">
+﻿<div class="panel panel-primary" ng-show="vm.localities && vm.sports">
     <div class="panel-heading"
          style="font-size:large">
         {{}}
     </div>
     <div class="panel-body">
-        <div>
-            <select ng-options="locality.name for locality in vm.localities" ng-model="vm.choosenLocality"></select>
-        </div>
-        <select ng-options="sport.name for sport in vm.sports" ng-model="vm.choosenSport"></select>
-        <select ng-options="variant.description for variant in vm.choosenSport.variants" ng-model="vm.choosenSportVariant">
-            <option value="">Any</option>
-        </select>
+        <!--<pre>{{vm | json}}</pre>-->
+
+        <md-select ng-model="vm.choosenLocality" placeholder="Locality">
+            <md-option selected="vm.choosenLocality.name" ng-repeat="locality in vm.localities" ng-value="locality">{{locality.name}}</md-option>
+        </md-select>
+        <md-select ng-model="vm.choosenSport" placeholder="Sport">
+            <md-option selected="vm.choosenSport.name" ng-repeat="sport in vm.sports" ng-value="sport">{{sport.name}}</md-option>
+        </md-select>
+        <md-select ng-model="vm.choosenSportVariant" placeholder="Variant">
+            <md-option selected="vm.choosenSportVariant.name" ng-repeat="variant in vm.choosenSport.variants" ng-value="variant">{{variant.description}}</md-option>
+        </md-select>
+        <md-tabs>
+            <md-tab label="Player Profile">
+                <div ng-include="'playerProfileView.html'"></div>
+            </md-tab>
+            <md-tab label="Create New Game">
+                <div ng-include="'addNewGameView.html'"></div>
+            </md-tab>
+            <md-tab label="Find a Game">
+            </md-tab>
+            <md-tab label="Find a Player">
+            </md-tab>
+        </md-tabs>
+        <!--
+                <select ng-options="sport.name for sport in vm.sports" ng-model="vm.choosenSport"></select>
+                <select ng-options="variant.description for variant in vm.choosenSport.variants" ng-model="vm.choosenSportVariant">
+                    <option value="">Any</option>
+                </select>
+        -->
+        <!--
+            https://github.com/pc035860/angular-easyfb#fbinit
+            For example see http://plnkr.co/edit/1c5cWB?p=preview
+        <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+        <div class="fb-share-button" data-href="http://developers.facebook.com/docs/plugins/" data-type="button_count"></div>
+        <div class="fb-post" data-href="https://www.facebook.com/FacebookDevelopers/posts/10151471074398553" data-width="500"></div>
+        <div class="fb-send" data-href="http://developers.facebook.com/docs/plugins/" data-colorscheme="light"></div>
+        <div class="fb-follow" data-href="http://www.facebook.com/zuck" data-colorscheme="light" data-layout="standard" data-show-faces="true"></div>
+        -->
 
     </div>
 </div>

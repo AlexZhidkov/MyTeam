@@ -1,5 +1,5 @@
 ﻿module App.Common {
-    angular.module("teamBuilder.services", ["firebase"]);
+    angular.module("teamBuilder.repositoryService", []);
 
     import Game = Domain.Game;
     import Promise = angular.IPromise;
@@ -97,7 +97,8 @@
                             var sport = new Sport();
                             sport.name = sportFirebase.$id.valueOf();
                             sport.variants = new Array<SportVariant>();
-                            for (var i = 0; i < 20; i++) {
+                            sport.variants.push(new SportVariant(-1, "Any"));
+                            for (let i = 0; i < 20; i++) {
                                 if (angular.isUndefined(sportFirebase[i])) {
                                     break;
                                 }
@@ -193,12 +194,16 @@
         }
 
         addGame(locality: string, newGame: Domain.INewGame) {
+            if (angular.isUndefined(locality) || locality === "") {
+                console.log("Error: Locality is not defined");
+                return;
+            }
             var gamesRef = new Firebase(this.firebaseUrl + "Localities/" + locality + "/Games");
             var newGameRef = gamesRef.push(newGame);
         }
     }
 
     angular
-        .module("teamBuilder.services")
-        .service("repository", App.Common.Repository);
+        .module("teamBuilder.repositoryService")
+        .service("repositoryService", App.Common.Repository);
 }
