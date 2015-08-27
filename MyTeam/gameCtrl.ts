@@ -22,12 +22,15 @@
         description: string;
         placeGoogleId: string;
 
-        static $inject = ["$scope", "repositoryService"];
-        constructor(private $scope, private repositoryService: App.Common.Repository) {
+        static $inject = ["$scope", "repositoryService", "facebookService"];
+        constructor(private $scope, private repositoryService: Common.Repository, private facebookService : Common.IFacebookService) {
             var self = this;
             self.title = "Reports";
             self.description = "";
             self.placeGoogleId = "";
+
+
+            //facebookService.testAPI();
 
             //var place = repositoryService.getPlace('ChIJN1t_tDeuEmsRUsoyG83frY4');
             //self.games = repositoryService.getGames();
