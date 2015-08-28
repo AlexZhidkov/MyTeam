@@ -183,8 +183,15 @@
                 console.log("Error: Locality is not defined");
                 return;
             }
+            var data = new Data.Player();
+            data.description = player.description;
+            var sport1 = new Data.Sport();
+            sport1.name = player.sport.name;
+            sport1.variants = -1;
+            data.sports = [sport1];
+
             var playersRef = new Firebase(this.firebaseUrl + "Localities/" + this.locality + "/Players");
-            playersRef.push(player);
+            playersRef.push(data);
 
         }
 
