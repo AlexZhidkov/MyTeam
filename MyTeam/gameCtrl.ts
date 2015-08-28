@@ -94,20 +94,9 @@
 
         addNewPlayer() {
             var newPlayer = new Domain.Player();
-            newPlayer.description = "az description";
-            newPlayer.weekday =
-                (this.weekday.monday ? 1 : 0) |
-                (this.weekday.tuesday ? 2 : 0) |
-                (this.weekday.wednesday ? 4 : 0) |
-                (this.weekday.thursday ? 8 : 0) |
-                (this.weekday.friday ? 16 : 0) |
-                (this.weekday.saturday ? 32 : 0) |
-                (this.weekday.sunday ? 64 : 0);
-
-            newPlayer.timeOfDay =
-                (this.daytime.morning ? 1 : 0) |
-                (this.daytime.midday ? 2 : 0) |
-                (this.daytime.evening ? 4 : 0);
+            newPlayer.description = "az description 1";
+            newPlayer.timeOfDay = this.daytime;
+            newPlayer.weekday = this.weekday;
 
             this.repositoryService.addPlayer(newPlayer);
         }

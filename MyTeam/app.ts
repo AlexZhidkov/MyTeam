@@ -4,7 +4,7 @@
 /// <reference path="Scripts/typings/google.geolocation/google.geolocation.d.ts"/>
 /// <reference path="Scripts/typings/googlemaps/google.maps.d.ts"/>
 module App {
-    var main = angular.module("teamBuilder", ["ngMaterial", "firebase", "ezfb", "teamBuilder.repositoryService", "teamBuilder.facebookService", "teamBuilder.game"]);
+    var main = angular.module("teamBuilder", ["ngMaterial", "firebase", "ezfb", "teamBuilder.repositoryService", "teamBuilder.facebookService", "teamBuilder.mapperService", "teamBuilder.game"]);
 
     function facebookConfig(ezfbProvider): void {
         ezfbProvider.setInitParams({

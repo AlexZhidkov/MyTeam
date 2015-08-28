@@ -3,8 +3,8 @@
         id: string;
         sports: Domain.ISport[];
         description: string;
-        weekday: number;
-        timeOfDay: number;
+        weekday: IWeekday;
+        timeOfDay: IDaytime;
     }
 
     export class Player implements IPlayer {
@@ -16,7 +16,7 @@
         id: string;
         sports: Domain.ISport[];
         description: string;
-        weekday: number;
-        timeOfDay: number;
+        weekday: IWeekday;
+        timeOfDay: IDaytime;
     }
 } 

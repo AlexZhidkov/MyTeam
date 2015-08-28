@@ -19,8 +19,8 @@
         private locality = "ChIJc9U7KdW6MioR4E7fNbXwBAU";
         private firebaseUrl = "https://teambuilder.firebaseio.com/";
 
-        static $inject = ["$firebaseArray", "$firebaseObject", "$q", "$window"];
-        constructor(private $firebaseArray: AngularFireArrayService, private $firebaseObject: AngularFireObjectService, private $q, private $window) {
+        static $inject = ["$firebaseArray", "$firebaseObject", "$q", "$window", "mapperService"];
+        constructor(private $firebaseArray: AngularFireArrayService, private $firebaseObject: AngularFireObjectService, private $q, private $window, private mapper: Common.IMapperService) {
         }
 
         //https://github.com/casetext/fireproof
@@ -162,6 +162,8 @@
             sport1.name = "Football";
             sport1.variants = -1;
             data.sports = [sport1];
+            data.weekday = this.mapper.weekdayToNumber(player.weekday);
+            data.timeOfDay = this.mapper.daytimeToNumber(player.timeOfDay);
 
             var playersRef = new Firebase(this.firebaseUrl + "Localities/" + this.locality + "/Players");
             playersRef.push(data);
@@ -180,7 +182,7 @@
                 var playerObj = this.$firebaseObject(playerRef);
                 playerObj.$loaded()
                     .then(data => {
-                        deferred.resolve(this.domainPlayer(data));
+                        deferred.resolve(this.mapper.domainPlayer(data));
                     })
                     .catch(error => {
                         console.log("Error getting players:", error);
@@ -203,7 +205,7 @@
                     .then(list => {
                         var players = new Array<Domain.Player>();
                         list.forEach(playerData => {
-                            players.push(this.domainPlayer(playerData));
+                            players.push(this.mapper.domainPlayer(playerData));
                         });
 
                         deferred.resolve(players);
@@ -213,15 +215,6 @@
                     });
             }, 1000);
             return deferred.promise;
-        }
-
-        private domainPlayer(data: AngularFireSimpleObject): Domain.Player {
-            var player = new Domain.Player();
-            player.id = data.$id.valueOf();
-            player.description = data["description"];
-            player.sports = [];
-            //ToDo finish
-            return player;
         }
 
     }
