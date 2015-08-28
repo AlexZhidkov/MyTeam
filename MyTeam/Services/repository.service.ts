@@ -156,10 +156,6 @@
         }
 
         addPlayer(player: Domain.IPlayer): void {
-            if (angular.isUndefined(this.locality) || this.locality === "") {
-                console.log("Error: Locality is not defined");
-                return;
-            }
             var data = new Data.Player();
             data.description = player.description;
             var sport1 = new Data.Sport();
@@ -173,6 +169,10 @@
         }
 
         getPlayer(locality: string, id: string): angular.IPromise<Domain.IPlayer> {
+            if (angular.isUndefined(this.locality) || this.locality === "") {
+                console.log("Error: Locality is not defined");
+                return null;
+            }
             var deferred = this.$q.defer();
             setTimeout(() => {
                 deferred.notify("About to get players.");
@@ -180,22 +180,20 @@
                 var playerObj = this.$firebaseObject(playerRef);
                 playerObj.$loaded()
                     .then(data => {
-                        var player = new Domain.Player();
-                        player.id = data.$id.valueOf();
-                        player.description = data["description"];
-                    //ToDo finish
-
-                        deferred.resolve(player);
+                        deferred.resolve(this.domainPlayer(data));
                     })
                     .catch(error => {
-                        console.log("Error:", error);
+                        console.log("Error getting players:", error);
                     });
             }, 1000);
             return deferred.promise;
         }
 
-        //ToDo finish
         getPlayers(locality: string, sport: string): angular.IPromise<Domain.IPlayer[]> {
+            if (angular.isUndefined(this.locality) || this.locality === "") {
+                console.log("Error: Locality is not defined");
+                return null;
+            }
             var deferred = this.$q.defer();
             setTimeout(() => {
                 deferred.notify("About to get players.");
@@ -221,7 +219,8 @@
             var player = new Domain.Player();
             player.id = data.$id.valueOf();
             player.description = data["description"];
-
+            player.sports = [];
+            //ToDo finish
             return player;
         }
 

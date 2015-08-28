@@ -1,16 +1,44 @@
-﻿<div class="panel panel-primary">
-    <div class="panel-heading"
-         style="font-size:large">
-        {{::vm.title}}
-    </div>
-    <div class="panel-body">
-        <!--
-                <pre>{{vm | json}}</pre>
-        -->
+﻿<md-input-container>
+    <md-content>
+        <md-input-container flex>
+            <label>Description</label>
+            <textarea ng-model="vm.player.description"></textarea>
+        </md-input-container>
+        <section layout-wrap>
+            <md-button class="md-fab" ng-style="!vm.monday && {'background-color':'transparent', 'color':'initial'}" aria-label="Monday" ng-click="vm.monday = !vm.monday">
+                Mon
+            </md-button>
+            <md-button class="md-fab" ng-style="!vm.tuesday && {'background-color':'transparent', 'color':'initial'}" aria-label="Tuesday" ng-click="vm.tuesday = !vm.tuesday">
+                Tue
+            </md-button>
+            <md-button class="md-fab" ng-style="!vm.wednesday && {'background-color':'transparent', 'color':'initial'}" aria-label="Wednesday" ng-click="vm.wednesday = !vm.wednesday">
+                Wed
+            </md-button>
+            <md-button class="md-fab" ng-style="!vm.thursday && {'background-color':'transparent', 'color':'initial'}" aria-label="Thursday" ng-click="vm.thursday = !vm.thursday">
+                Thu
+            </md-button>
+            <md-button class="md-fab" ng-style="!vm.friday && {'background-color':'transparent', 'color':'initial'}" aria-label="Friday" ng-click="vm.friday = !vm.friday">
+                Fri
+            </md-button>
+            <md-button class="md-fab" ng-style="!vm.saturday && {'background-color':'transparent', 'color':'initial'}" aria-label="Saturday" ng-click="vm.saturday = !vm.saturday">
+                Sat
+            </md-button>
+            <md-button class="md-fab" ng-style="!vm.sunday && {'background-color':'transparent', 'color':'initial'}" aria-label="Sunday" ng-click="vm.sunday = !vm.sunday">
+                Sun
+            </md-button>
+        </section>
 
-        Person
-
-        <button ng-click="vm.addNewGame()" class="btn btn-large btn-primary">Add</button>
-
-    </div>
-</div>
+        <section layout="row" layout-align="center center" layout-wrap>
+            <md-button class="md-raised md-primary" ng-style="!vm.morning && {'background-color':'transparent', 'color':'initial'}" aria-label="Morning" ng-click="vm.morning = !vm.morning">
+                Morning
+            </md-button>
+            <md-button class="md-raised md-primary" ng-style="!vm.midday && {'background-color':'transparent', 'color':'initial'}" aria-label="Midday" ng-click="vm.midday = !vm.midday">
+                Midday
+            </md-button>
+            <md-button class="md-raised md-primary" ng-style="!vm.afternoon && {'background-color':'transparent', 'color':'initial'}" aria-label="Afternoon" ng-click="vm.afternoon = !vm.afternoon">
+                Afternoon
+            </md-button>
+        </section>
+        <md-button ng-click="vm.addNewGame()">Save</md-button>
+    </md-content>
+</md-input-container>

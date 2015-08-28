@@ -15,6 +15,8 @@
         sports: Domain.ISport[];
         places: Domain.IPlace[];
 
+        monday: boolean;
+
         choosenLocality: Domain.ILocality;
         choosenSport: Domain.ISport;
         choosenSportVariant: Domain.ISportVariant;
@@ -28,6 +30,7 @@
             self.title = "Reports";
             self.description = "";
             self.placeGoogleId = "";
+            self.monday = true;
             
             //facebookService.testAPI();
 
@@ -42,14 +45,16 @@
                 }, error => {
                     console.log("Error getting places from repository", error);
                 });
-/*
-            repositoryService.getPlayers()
+
+            repositoryService.getSports()
                 .then(data => {
-                    //self.players = data;
+                    self.sports = data;
+                    self.choosenSport = data[0];
+                    self.choosenSportVariant = data[0].variants[0];
                 }, error => {
-                    console.log("Error getting players from repository", error);
+                    console.log("Error getting sports from repository", error);
                 });
-*/
+/*
             repositoryService.getPlace("ChIJswzMHEqlMioRq3D5C02BNFM")
                 .then(data => {
                     var place = data;
@@ -74,14 +79,7 @@
                 }, error => {
                     console.log("Error getting games from repository", error);
                 });
-            repositoryService.getSports()
-                .then(data => {
-                    self.sports = data;
-                    self.choosenSport = data[0];
-                    self.choosenSportVariant = data[0].variants[0];
-                }, error => {
-                    console.log("Error getting sports from repository", error);
-                });
+            */
         }
 
         addNewGame() {
