@@ -12,15 +12,15 @@
         getSports(): angular.IPromise<Sport[]>;
         addPlayer(player: Domain.IPlayer): void;
         getPlayer(locality: string, id: string): angular.IPromise<Domain.IPlayer>;
-        getPlayers(locality: string): angular.IPromise<Domain.IPlayer[]>;
+        getPlayers(locality: string, sport: string): angular.IPromise<Domain.IPlayer[]>;
     }
 
     export class Repository implements IRepository {
         private locality = "ChIJc9U7KdW6MioR4E7fNbXwBAU";
         private firebaseUrl = "https://teambuilder.firebaseio.com/";
 
-        static $inject = ["$firebaseArray", "$q", "$window"];
-        constructor(private $firebaseArray: AngularFireArrayService, private $q, private $window) {
+        static $inject = ["$firebaseArray", "$firebaseObject", "$q", "$window"];
+        constructor(private $firebaseArray: AngularFireArrayService, private $firebaseObject: AngularFireObjectService, private $q, private $window) {
         }
 
         //https://github.com/casetext/fireproof
@@ -172,22 +172,20 @@
 
         }
 
-        //ToDo finish
         getPlayer(locality: string, id: string): angular.IPromise<Domain.IPlayer> {
             var deferred = this.$q.defer();
             setTimeout(() => {
                 deferred.notify("About to get players.");
-                var placesRef = new Firebase(this.firebaseUrl + "Localities/" + locality + "/Player");
-                var placesArray = this.$firebaseArray(placesRef);
-                placesArray.$loaded()
-                    .then(list => {
-                        var places = new Array<Place>();
-                        list.forEach(placeFirebase => {
-                            var place = new Place(placeFirebase.$id.valueOf(), placeFirebase.$value);
-                            places.push(place);
-                        });
+                var playerRef = new Firebase(this.firebaseUrl + "Localities/" + locality + "/Players/" + id);
+                var playerObj = this.$firebaseObject(playerRef);
+                playerObj.$loaded()
+                    .then(data => {
+                        var player = new Domain.Player();
+                        player.id = data.$id.valueOf();
+                        player.description = data["description"];
+                    //ToDo finish
 
-                        deferred.resolve(places);
+                        deferred.resolve(player);
                     })
                     .catch(error => {
                         console.log("Error:", error);
@@ -197,27 +195,34 @@
         }
 
         //ToDo finish
-        getPlayers(locality: string): angular.IPromise<Domain.IPlayer[]> {
+        getPlayers(locality: string, sport: string): angular.IPromise<Domain.IPlayer[]> {
             var deferred = this.$q.defer();
             setTimeout(() => {
                 deferred.notify("About to get players.");
-                var placesRef = new Firebase(this.firebaseUrl + "Localities/" + locality + "/Players");
-                var placesArray = this.$firebaseArray(placesRef);
-                placesArray.$loaded()
+                var playersRef = new Firebase(this.firebaseUrl + "Localities/" + locality + "/Players");
+                var playersArray = this.$firebaseArray(playersRef);
+                playersArray.$loaded()
                     .then(list => {
-                        var places = new Array<Place>();
-                        list.forEach(placeFirebase => {
-                            var place = new Place(placeFirebase.$id.valueOf(), placeFirebase.$value);
-                            places.push(place);
+                        var players = new Array<Domain.Player>();
+                        list.forEach(playerData => {
+                            players.push(this.domainPlayer(playerData));
                         });
 
-                        deferred.resolve(places);
+                        deferred.resolve(players);
                     })
                     .catch(error => {
                         console.log("Error:", error);
                     });
             }, 1000);
             return deferred.promise;
+        }
+
+        private domainPlayer(data: AngularFireSimpleObject): Domain.Player {
+            var player = new Domain.Player();
+            player.id = data.$id.valueOf();
+            player.description = data["description"];
+
+            return player;
         }
 
     }

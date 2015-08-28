@@ -56,6 +56,18 @@
                 }, error => {
                     console.log("Error getting place from repository", error);
                 });
+            repositoryService.getPlayer("ChIJc9U7KdW6MioR4E7fNbXwBAU", "-JxmUTfgatvRIZ59oD5W")
+                .then(data => {
+                    var player = data;
+                }, error => {
+                    console.log("Error getting player from repository", error);
+                });
+            repositoryService.getPlayers("ChIJc9U7KdW6MioR4E7fNbXwBAU", "Football")
+                .then(data => {
+                    var player = data;
+                }, error => {
+                    console.log("Error getting player from repository", error);
+                });
             repositoryService.getGames()
                 .then(data => {
                     self.games = data;
