@@ -5,40 +5,40 @@
             <textarea ng-model="vm.player.description"></textarea>
         </md-input-container>
         <section layout-wrap>
-            <md-button class="md-fab" ng-style="!vm.monday && {'background-color':'transparent', 'color':'initial'}" aria-label="Monday" ng-click="vm.monday = !vm.monday">
+            <md-button class="md-fab" ng-style="!vm.weekday.monday && {'background-color':'transparent', 'color':'initial'}" aria-label="Monday" ng-click="vm.weekday.monday = !vm.weekday.monday">
                 Mon
             </md-button>
-            <md-button class="md-fab" ng-style="!vm.tuesday && {'background-color':'transparent', 'color':'initial'}" aria-label="Tuesday" ng-click="vm.tuesday = !vm.tuesday">
+            <md-button class="md-fab" ng-style="!vm.weekday.tuesday && {'background-color':'transparent', 'color':'initial'}" aria-label="Tuesday" ng-click="vm.weekday.tuesday = !vm.weekday.tuesday">
                 Tue
             </md-button>
-            <md-button class="md-fab" ng-style="!vm.wednesday && {'background-color':'transparent', 'color':'initial'}" aria-label="Wednesday" ng-click="vm.wednesday = !vm.wednesday">
+            <md-button class="md-fab" ng-style="!vm.weekday.wednesday && {'background-color':'transparent', 'color':'initial'}" aria-label="Wednesday" ng-click="vm.weekday.wednesday = !vm.weekday.wednesday">
                 Wed
             </md-button>
-            <md-button class="md-fab" ng-style="!vm.thursday && {'background-color':'transparent', 'color':'initial'}" aria-label="Thursday" ng-click="vm.thursday = !vm.thursday">
+            <md-button class="md-fab" ng-style="!vm.weekday.thursday && {'background-color':'transparent', 'color':'initial'}" aria-label="Thursday" ng-click="vm.weekday.thursday = !vm.weekday.thursday">
                 Thu
             </md-button>
-            <md-button class="md-fab" ng-style="!vm.friday && {'background-color':'transparent', 'color':'initial'}" aria-label="Friday" ng-click="vm.friday = !vm.friday">
+            <md-button class="md-fab" ng-style="!vm.weekday.friday && {'background-color':'transparent', 'color':'initial'}" aria-label="Friday" ng-click="vm.weekday.friday = !vm.weekday.friday">
                 Fri
             </md-button>
-            <md-button class="md-fab" ng-style="!vm.saturday && {'background-color':'transparent', 'color':'initial'}" aria-label="Saturday" ng-click="vm.saturday = !vm.saturday">
+            <md-button class="md-fab" ng-style="!vm.weekday.saturday && {'background-color':'transparent', 'color':'initial'}" aria-label="Saturday" ng-click="vm.weekday.saturday = !vm.weekday.saturday">
                 Sat
             </md-button>
-            <md-button class="md-fab" ng-style="!vm.sunday && {'background-color':'transparent', 'color':'initial'}" aria-label="Sunday" ng-click="vm.sunday = !vm.sunday">
+            <md-button class="md-fab" ng-style="!vm.weekday.sunday && {'background-color':'transparent', 'color':'initial'}" aria-label="Sunday" ng-click="vm.weekday.sunday = !vm.weekday.sunday">
                 Sun
             </md-button>
         </section>
 
         <section layout="row" layout-align="center center" layout-wrap>
-            <md-button class="md-raised md-primary" ng-style="!vm.morning && {'background-color':'transparent', 'color':'initial'}" aria-label="Morning" ng-click="vm.morning = !vm.morning">
+            <md-button class="md-raised md-primary" ng-style="!vm.daytime.morning && {'background-color':'transparent', 'color':'initial'}" aria-label="Morning" ng-click="vm.daytime.morning = !vm.daytime.morning">
                 Morning
             </md-button>
-            <md-button class="md-raised md-primary" ng-style="!vm.midday && {'background-color':'transparent', 'color':'initial'}" aria-label="Midday" ng-click="vm.midday = !vm.midday">
+            <md-button class="md-raised md-primary" ng-style="!vm.daytime.midday && {'background-color':'transparent', 'color':'initial'}" aria-label="Midday" ng-click="vm.daytime.midday = !vm.daytime.midday">
                 Midday
             </md-button>
-            <md-button class="md-raised md-primary" ng-style="!vm.afternoon && {'background-color':'transparent', 'color':'initial'}" aria-label="Afternoon" ng-click="vm.afternoon = !vm.afternoon">
+            <md-button class="md-raised md-primary" ng-style="!vm.daytime.afternoon && {'background-color':'transparent', 'color':'initial'}" aria-label="Afternoon" ng-click="vm.daytime.afternoon = !vm.daytime.afternoon">
                 Afternoon
             </md-button>
         </section>
-        <md-button ng-click="vm.addNewGame()">Save</md-button>
+        <md-button ng-click="vm.addNewPlayer()">Save</md-button>
     </md-content>
 </md-input-container>

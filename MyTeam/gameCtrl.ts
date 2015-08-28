@@ -15,7 +15,8 @@
         sports: Domain.ISport[];
         places: Domain.IPlace[];
 
-        monday: boolean;
+        daytime: Domain.IDaytime;
+        weekday: Domain.IWeekday;
 
         choosenLocality: Domain.ILocality;
         choosenSport: Domain.ISport;
@@ -30,7 +31,6 @@
             self.title = "Reports";
             self.description = "";
             self.placeGoogleId = "";
-            self.monday = true;
             
             //facebookService.testAPI();
 
@@ -54,32 +54,32 @@
                 }, error => {
                     console.log("Error getting sports from repository", error);
                 });
-/*
-            repositoryService.getPlace("ChIJswzMHEqlMioRq3D5C02BNFM")
-                .then(data => {
-                    var place = data;
-                }, error => {
-                    console.log("Error getting place from repository", error);
-                });
-            repositoryService.getPlayer("ChIJc9U7KdW6MioR4E7fNbXwBAU", "-JxmUTfgatvRIZ59oD5W")
-                .then(data => {
-                    var player = data;
-                }, error => {
-                    console.log("Error getting player from repository", error);
-                });
-            repositoryService.getPlayers("ChIJc9U7KdW6MioR4E7fNbXwBAU", "Football")
-                .then(data => {
-                    var player = data;
-                }, error => {
-                    console.log("Error getting player from repository", error);
-                });
-            repositoryService.getGames()
-                .then(data => {
-                    self.games = data;
-                }, error => {
-                    console.log("Error getting games from repository", error);
-                });
-            */
+            /*
+                        repositoryService.getPlace("ChIJswzMHEqlMioRq3D5C02BNFM")
+                            .then(data => {
+                                var place = data;
+                            }, error => {
+                                console.log("Error getting place from repository", error);
+                            });
+                        repositoryService.getPlayer("ChIJc9U7KdW6MioR4E7fNbXwBAU", "-JxmUTfgatvRIZ59oD5W")
+                            .then(data => {
+                                var player = data;
+                            }, error => {
+                                console.log("Error getting player from repository", error);
+                            });
+                        repositoryService.getPlayers("ChIJc9U7KdW6MioR4E7fNbXwBAU", "Football")
+                            .then(data => {
+                                var player = data;
+                            }, error => {
+                                console.log("Error getting player from repository", error);
+                            });
+                        repositoryService.getGames()
+                            .then(data => {
+                                self.games = data;
+                            }, error => {
+                                console.log("Error getting games from repository", error);
+                            });
+                        */
         }
 
         addNewGame() {
@@ -95,6 +95,19 @@
         addNewPlayer() {
             var newPlayer = new Domain.Player();
             newPlayer.description = "az description";
+            newPlayer.weekday =
+                (this.weekday.monday ? 1 : 0) |
+                (this.weekday.tuesday ? 2 : 0) |
+                (this.weekday.wednesday ? 4 : 0) |
+                (this.weekday.thursday ? 8 : 0) |
+                (this.weekday.friday ? 16 : 0) |
+                (this.weekday.saturday ? 32 : 0) |
+                (this.weekday.sunday ? 64 : 0);
+
+            newPlayer.timeOfDay =
+                (this.daytime.morning ? 1 : 0) |
+                (this.daytime.midday ? 2 : 0) |
+                (this.daytime.evening ? 4 : 0);
 
             this.repositoryService.addPlayer(newPlayer);
         }

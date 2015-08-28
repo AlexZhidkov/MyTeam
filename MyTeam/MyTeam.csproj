@@ -1221,12 +1221,14 @@
     <TypeScriptCompile Include="app.ts" />
     <TypeScriptCompile Include="Data\player.ts" />
     <TypeScriptCompile Include="Data\sport.ts" />
+    <TypeScriptCompile Include="Domain\daytime.ts" />
     <TypeScriptCompile Include="Domain\game.ts" />
     <TypeScriptCompile Include="Domain\player.ts" />
     <TypeScriptCompile Include="Domain\sport.ts" />
     <TypeScriptCompile Include="Domain\place.ts" />
     <TypeScriptCompile Include="Domain\locality.ts" />
     <TypeScriptCompile Include="Domain\sportVariant.ts" />
+    <TypeScriptCompile Include="Domain\weekday.ts" />
     <TypeScriptCompile Include="gameCtrl.ts" />
     <TypeScriptCompile Include="myCtrl.ts" />
     <TypeScriptCompile Include="googlePlaces.ts" />
