@@ -23,30 +23,33 @@
         placeGoogleId: string;
 
         static $inject = ["$scope", "repositoryService", "facebookService"];
-        constructor(private $scope, private repositoryService: Common.Repository, private facebookService : Common.IFacebookService) {
+        constructor(private $scope, private repositoryService: Common.Repository, private facebookService: Common.IFacebookService) {
             var self = this;
             self.title = "Reports";
             self.description = "";
             self.placeGoogleId = "";
-
-
+            
             //facebookService.testAPI();
 
-            //var place = repositoryService.getPlace('ChIJN1t_tDeuEmsRUsoyG83frY4');
-            //self.games = repositoryService.getGames();
             repositoryService.getLocalities()
                 .then(data => {
                     self.localities = data;
                     self.choosenLocality = data[0];
+
+                    //ToDo update locality when changed
+                    //var locality = "ChIJc9U7KdW6MioR4E7fNbXwBAU";
+                    //repositoryService.setLocality(this.choosenLocality.id);
                 }, error => {
                     console.log("Error getting places from repository", error);
                 });
-            repositoryService.getPlaces("Perth")
+/*
+            repositoryService.getPlayers()
                 .then(data => {
-                    self.places = data;
+                    //self.players = data;
                 }, error => {
-                    console.log("Error getting places from repository", error);
+                    console.log("Error getting players from repository", error);
                 });
+*/
             repositoryService.getPlace("ChIJswzMHEqlMioRq3D5C02BNFM")
                 .then(data => {
                     var place = data;
@@ -67,7 +70,6 @@
                 }, error => {
                     console.log("Error getting sports from repository", error);
                 });
-
         }
 
         addNewGame() {
@@ -77,9 +79,20 @@
             newGame.place = this.placeGoogleId;
             newGame.description = this.description;
 
-            //var locality = "ChIJc9U7KdW6MioR4E7fNbXwBAU";
-            this.repositoryService.addGame(this.choosenLocality.id, newGame);
+            //this.repositoryService.addGame(newGame);
         }
+
+        addNewPlayer() {
+            var newPlayer = new Domain.Player();
+            newPlayer.sport = new Domain.Sport();
+            newPlayer.sport.name = this.choosenSport.name;
+            //ToDo add all variants
+            newPlayer.sport.variants = [this.choosenSportVariant];
+            newPlayer.description = "az description";
+
+            this.repositoryService.addPlayer(newPlayer);
+        }
+
     }
     angular
         .module("teamBuilder.game", [])

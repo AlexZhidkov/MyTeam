@@ -1220,6 +1220,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
     <TypeScriptCompile Include="Domain\game.ts" />
+    <TypeScriptCompile Include="Domain\player.ts" />
     <TypeScriptCompile Include="Domain\sport.ts" />
     <TypeScriptCompile Include="Domain\place.ts" />
     <TypeScriptCompile Include="Domain\locality.ts" />

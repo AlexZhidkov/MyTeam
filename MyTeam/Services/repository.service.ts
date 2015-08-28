@@ -8,43 +8,19 @@
     import SportVariant = Domain.SportVariant;
     import PlaceResult = google.maps.places.PlaceResult;
 
-    export interface IGamesFirebase extends AngularFireSimpleObject {
-        sport: string;
-        variant: string;
-        place: string;
-        description: string;
-    }
-
     export interface IRepository {
-        getSports(): angular.IPromise<Sport[]>
+        getSports(): angular.IPromise<Sport[]>;
+        addPlayer(player: Domain.IPlayer): void;
+        getPlayer(id: string): angular.IPromise<Domain.IPlayer>;
+        getPlayers(): angular.IPromise<Domain.IPlayer[]>;
     }
 
     export class Repository implements IRepository {
-
-        data: Promise<string>;
-        obj: AngularFireObject;
-
+        private locality = "ChIJc9U7KdW6MioR4E7fNbXwBAU";
         private firebaseUrl = "https://teambuilder.firebaseio.com/";
 
         static $inject = ["$firebaseArray", "$q", "$window"];
         constructor(private $firebaseArray: AngularFireArrayService, private $q, private $window) {
-            //var fb = new Firebase('https://teambuilder.firebaseio.com/Sports/0');
-            //this.obj = $firebaseObject(fb);
-
-            //this.data = $firebaseObject(fb).$value; 
-            // service.users = $firebaseObject(usersRef).$loaded; 
-            /*
-                        data = $firebaseObject(fb);
-                        data.$loaded().then((d) => {
-                            alert(d.$value);
-            
-                        });
-            
-                        fb.child("id").on("value", snapshot => {
-                           alert(snapshot.val());  
-                           this.data = snapshot.val();
-                        });
-            */
         }
 
         //https://github.com/casetext/fireproof
@@ -201,6 +177,20 @@
             var gamesRef = new Firebase(this.firebaseUrl + "Localities/" + locality + "/Games");
             var newGameRef = gamesRef.push(newGame);
         }
+
+        addPlayer(player: App.Domain.IPlayer): void {
+            if (angular.isUndefined(this.locality) || this.locality === "") {
+                console.log("Error: Locality is not defined");
+                return;
+            }
+            var playersRef = new Firebase(this.firebaseUrl + "Localities/" + this.locality + "/Players");
+            playersRef.push(player);
+
+        }
+
+        getPlayer(id: string): angular.IPromise<App.Domain.IPlayer> { throw new Error("Not implemented"); }
+
+        getPlayers(): angular.IPromise<App.Domain.IPlayer[]> { throw new Error("Not implemented"); }
     }
 
     angular
