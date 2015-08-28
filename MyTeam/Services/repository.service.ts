@@ -11,8 +11,8 @@
     export interface IRepository {
         getSports(): angular.IPromise<Sport[]>;
         addPlayer(player: Domain.IPlayer): void;
-        getPlayer(id: string): angular.IPromise<Domain.IPlayer>;
-        getPlayers(): angular.IPromise<Domain.IPlayer[]>;
+        getPlayer(locality: string, id: string): angular.IPromise<Domain.IPlayer>;
+        getPlayers(locality: string): angular.IPromise<Domain.IPlayer[]>;
     }
 
     export class Repository implements IRepository {
@@ -121,29 +121,6 @@
             return deferred.promise;
         }
 
-        getPlaces(location: string): Promise<Place[]> {
-            var deferred = this.$q.defer();
-            setTimeout(() => {
-                deferred.notify("About to get places.");
-                var placesRef = new Firebase(this.firebaseUrl + "Places/" + location);
-                var placesArray = this.$firebaseArray(placesRef);
-                placesArray.$loaded()
-                    .then(list => {
-                        var places = new Array<Place>();
-                        list.forEach(placeFirebase => {
-                            var place = new Place(placeFirebase.$id.valueOf(), placeFirebase.$value);
-                            places.push(place);
-                        });
-
-                        deferred.resolve(places);
-                    })
-                    .catch(error => {
-                        console.log("Error:", error);
-                    });
-            }, 1000);
-            return deferred.promise;
-        }
-
         getPlace(placeId: string): Promise<PlaceResult> {
             var deferred = this.$q.defer();
             setTimeout(() => {
@@ -178,7 +155,7 @@
             var newGameRef = gamesRef.push(newGame);
         }
 
-        addPlayer(player: App.Domain.IPlayer): void {
+        addPlayer(player: Domain.IPlayer): void {
             if (angular.isUndefined(this.locality) || this.locality === "") {
                 console.log("Error: Locality is not defined");
                 return;
@@ -186,7 +163,7 @@
             var data = new Data.Player();
             data.description = player.description;
             var sport1 = new Data.Sport();
-            sport1.name = player.sport.name;
+            sport1.name = "Football";
             sport1.variants = -1;
             data.sports = [sport1];
 
@@ -195,9 +172,54 @@
 
         }
 
-        getPlayer(id: string): angular.IPromise<App.Domain.IPlayer> { throw new Error("Not implemented"); }
+        //ToDo finish
+        getPlayer(locality: string, id: string): angular.IPromise<Domain.IPlayer> {
+            var deferred = this.$q.defer();
+            setTimeout(() => {
+                deferred.notify("About to get players.");
+                var placesRef = new Firebase(this.firebaseUrl + "Localities/" + locality + "/Player");
+                var placesArray = this.$firebaseArray(placesRef);
+                placesArray.$loaded()
+                    .then(list => {
+                        var places = new Array<Place>();
+                        list.forEach(placeFirebase => {
+                            var place = new Place(placeFirebase.$id.valueOf(), placeFirebase.$value);
+                            places.push(place);
+                        });
 
-        getPlayers(): angular.IPromise<App.Domain.IPlayer[]> { throw new Error("Not implemented"); }
+                        deferred.resolve(places);
+                    })
+                    .catch(error => {
+                        console.log("Error:", error);
+                    });
+            }, 1000);
+            return deferred.promise;
+        }
+
+        //ToDo finish
+        getPlayers(locality: string): angular.IPromise<Domain.IPlayer[]> {
+            var deferred = this.$q.defer();
+            setTimeout(() => {
+                deferred.notify("About to get players.");
+                var placesRef = new Firebase(this.firebaseUrl + "Localities/" + locality + "/Players");
+                var placesArray = this.$firebaseArray(placesRef);
+                placesArray.$loaded()
+                    .then(list => {
+                        var places = new Array<Place>();
+                        list.forEach(placeFirebase => {
+                            var place = new Place(placeFirebase.$id.valueOf(), placeFirebase.$value);
+                            places.push(place);
+                        });
+
+                        deferred.resolve(places);
+                    })
+                    .catch(error => {
+                        console.log("Error:", error);
+                    });
+            }, 1000);
+            return deferred.promise;
+        }
+
     }
 
     angular

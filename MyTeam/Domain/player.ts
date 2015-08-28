@@ -1,7 +1,7 @@
 ﻿module App.Domain {
     export interface IPlayer {
         id: string;
-        sport: ISport;
+        sports: Domain.ISport[];
         description: string;
         weekday: number;
         timeOfDay: number;
@@ -14,7 +14,7 @@
         }
 
         id: string;
-        sport: ISport;
+        sports: Domain.ISport[];
         description: string;
         weekday: number;
         timeOfDay: number;

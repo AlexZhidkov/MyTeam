@@ -84,10 +84,6 @@
 
         addNewPlayer() {
             var newPlayer = new Domain.Player();
-            newPlayer.sport = new Domain.Sport();
-            newPlayer.sport.name = this.choosenSport.name;
-            //ToDo add all variants
-            newPlayer.sport.variants = [this.choosenSportVariant];
             newPlayer.description = "az description";
 
             this.repositoryService.addPlayer(newPlayer);
